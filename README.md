@@ -5,7 +5,11 @@ A Sign Language to Speech Translator involving real-time hand gesture detection 
 **modules to import:**
 
 mediapipe -- works only on python 3.10 not later versions
+
 scikit-learn
+
 opencv-python
+
 tensorflow
+
 pyttsx3
