@@ -16,6 +16,8 @@ A real-time system that detects sign language gestures from a webcam, translates
 
 - numpy
 
+- joblib
+
 ## **Working**
 
 1. Video Capture using OpenCV thorugh system webcam
