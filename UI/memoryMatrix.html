@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Matrix - GestureFlow</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+:root {
+    --primary-glow: #4ade80; /* Green */
+    --secondary-glow: #31c3cd; /* Cyan */
+    --dark-bg: #0d1117;
+    --card-bg: rgba(22, 27, 34, 0.7);
+    --border-color: rgba(68, 76, 88, 0.7);
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--dark-bg);
+    color: #e2e8f0;
+    overflow-x: hidden;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.8;
+    z-index: -1;
+}
+.font-orbitron { font-family: 'Orbitron', sans-serif; }
+.card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+.card:hover {
+    border-color: var(--secondary-glow);
+    box-shadow: 0 0 25px var(--secondary-glow);
+    transform: scale(1.02);
+}
+.glow-text {
+    text-shadow: 0 0 5px var(--primary-glow), 0 0 15px var(--primary-glow), 0 0 30px var(--primary-glow);
+}
+.sequence-letter {
+    font-family: 'Orbitron', monospace;
+    font-size: 6rem;
+    font-weight: 700;
+    color: var(--primary-glow);
+    text-shadow: 0 0 5px var(--primary-glow), 0 0 15px var(--primary-glow), 0 0 30px var(--primary-glow);
+}
+.game-stats {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+</style>
+</head>
+
+<body class="text-white">
+
+<video id="camera" autoplay playsinline muted style="display: none;"></video>
+
+<header class="fixed top-0 left-0 right-0 z-50 py-4 px-8 bg-[rgba(13,17,23,0.8)] backdrop-blur-sm shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="#" class="font-orbitron text-2xl font-bold text-sky-400">Memory Matrix</a>
+        <nav>
+            <ul class="flex space-x-8">
+                <li><a href="#" class="font-orbitron text-lg text-gray-300 hover:text-white">HOME</a></li>
+                <li><a href="#" class="font-orbitron text-lg text-gray-300 hover:text-white">GAMES</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="min-h-screen flex flex-col items-center justify-center p-4 pt-24">
+
+    <section class="max-w-6xl mx-auto text-center mb-10">
+        <h1 class="font-orbitron text-5xl md:text-7xl font-bold mb-4 glow-text">Memory Matrix</h1>
+        <p class="text-xl md:text-2xl text-sky-300 tracking-wide">Train your memory with AI Sign Language Recognition!</p>
+    </section>
+
+    <main class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center gap-8 mb-10">
+
+        <div class="flex flex-col items-center w-full md:w-1/2">
+            <h2 class="font-orbitron text-3xl md:text-4xl text-sky-400 mb-4 text-center">Game Camera</h2>
+            <div class="card relative overflow-hidden aspect-video rounded-xl w-full">
+                <video id="game-video" autoplay class="absolute top-0 left-0 w-full h-full object-cover rounded-xl"></video>
+            </div>
+        </div>
+
+        <div class="flex flex-col items-center w-full md:w-1/2">
+            <h2 class="font-orbitron text-3xl md:text-4xl text-sky-400 mb-4 text-center">Sequence</h2>
+            <div class="card p-8 rounded-xl w-full text-center">
+                <div id="sequence" class="sequence-letter mb-6 min-h-[7rem] flex items-center justify-center"></div>
+                <div class="game-stats mb-4">
+                    Level: <span id="level" class="text-green-400">1</span> |
+                    Score: <span id="score" class="text-green-400">0</span>
+                </div>
+                <div id="status" class="font-orbitron text-lg md:text-xl min-h-[2rem] mb-6"></div>
+                <select id="difficulty" class="mb-6 p-3 rounded-lg w-full font-orbitron bg-gray-800/50 text-white border border-gray-700">
+                    <option value="easy">Easy Mode</option>
+                    <option value="medium">Medium Mode</option>
+                    <option value="hard">Hard Mode</option>
+                </select>
+                <button id="startBtn" class="font-orbitron text-xl md:text-2xl bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-full uppercase w-full">
+                    Start Game
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="mt-20 py-8 text-gray-500 w-full border-t border-gray-700/50 text-center">
+        <p class="text-lg">&copy; 2025 Memory Matrix. All rights reserved.</p>
+    </footer>
+
+</div>
+
+<script>
+let sequence = [];
+let userIndex = 0;
+let score = 0;
+let level = 1;
+let video = document.getElementById("game-video");
+
+// Setup webcam
+navigator.mediaDevices.getUserMedia({ video: true }).then(stream => { 
+    video.srcObject = stream; 
+});
+
+// Start game
+document.getElementById("startBtn").onclick = async () => {
+    const difficulty = document.getElementById("difficulty").value;
+    const res = await fetch("/start_game", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ difficulty })
+    });
+    const data = await res.json();
+    sequence = data.sequence;
+    score = 0;
+    level = 1;
+    userIndex = 0;
+    document.getElementById("score").innerText = score;
+    document.getElementById("level").innerText = level;
+    document.getElementById("status").innerText = "";
+    await showSequence();
+};
+
+// Show sequence
+async function showSequence() {
+    const seqDiv = document.getElementById("sequence");
+    const statusDiv = document.getElementById("status");
+    
+    statusDiv.innerText = "Watch and memorize the sequence...";
+    statusDiv.className = "font-orbitron text-lg md:text-xl min-h-[2rem] text-sky-400 mb-6";
+    
+    for (let i = 0; i < sequence.length; i++) {
+        seqDiv.innerText = sequence[i];
+        await new Promise(r => setTimeout(r, 1000));
+        seqDiv.innerText = "";
+        await new Promise(r => setTimeout(r, 500));
+    }
+    
+    statusDiv.innerText = "Your turn! Perform the signs.";
+    statusDiv.className = "font-orbitron text-lg md:text-xl min-h-[2rem] text-green-400 mb-6";
+    startDetectionLoop();
+}
+
+// Capture webcam frame
+async function captureFrame() {
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL("image/jpeg");
+}
+
+// Detection loop
+async function startDetectionLoop() {
+    const statusDiv = document.getElementById("status");
+    
+    while (userIndex < sequence.length) {
+        let frame = await captureFrame();
+        let res = await fetch("/predict_sign", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ frame, expected: sequence[userIndex] })
+        });
+        let data = await res.json();
+
+        if (data.status === "correct") {
+            statusDiv.innerText = `✅ Correct! Detected: ${data.detected}`;
+            statusDiv.className = "font-orbitron text-lg md:text-xl min-h-[2rem] text-green-400 mb-6";
+            userIndex++;
+            score++;
+            document.getElementById("score").innerText = score;
+
+            if (userIndex === sequence.length) {
+                statusDiv.innerText = `🎉 Level ${level} completed!`;
+                statusDiv.className = "font-orbitron text-lg md:text-xl min-h-[2rem] text-sky-400 mb-6";
+                await new Promise(r => setTimeout(r, 1000));
+                nextRound();
+                break;
+            }
+        } else if (data.status === "wrong") {
+            statusDiv.innerText = `❌ Wrong! Expected: ${data.expected}, Detected: ${data.detected}`;
+            statusDiv.className = "font-orbitron text-lg md:text-xl min-h-[2rem] text-red-500 mb-6";
+            break;
+        }
+        await new Promise(r => setTimeout(r, 800));
+    }
+}
+
+// Next round
+async function nextRound() {
+    level++;
+    document.getElementById("level").innerText = level;
+    const difficulty = document.getElementById("difficulty").value;
+    const res = await fetch("/next_round", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ round: level, difficulty })
+    });
+    const data = await res.json();
+    sequence = data.sequence;
+    userIndex = 0;
+    await showSequence();
+}
+</script>
+
+</body>
+</html>
