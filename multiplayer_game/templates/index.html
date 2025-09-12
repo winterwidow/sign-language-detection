@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASL Multiplayer Game</title>
+
+  <!-- Google Fonts + Tailwind -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Your Theme -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="text-white font-roboto bg-[var(--dark-bg)]">
+
+  <!-- Top Nav -->
+  <nav class="flex justify-between items-center px-6 py-4 bg-transparent">
+    <h1 class="font-orbitron text-xl text-sky-400">GestureFlow</h1>
+    <div class="space-x-6 font-orbitron text-sm">
+      <a href="#" class="nav-link-glow">HOME</a>
+      <a href="#" class="nav-link-glow">ABOUT US</a>
+    </div>
+  </nav>
+
+  <!-- Game Section -->
+  <header class="game-header text-center py-4">
+    <div class="timer">⏳ Time Left: <span id="timer">30</span>s</div>
+    <div class="letter-display font-orbitron">{{ letter }}</div>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+    <!-- Player 1 -->
+    <div class="player-section card flex flex-col justify-center items-center p-8 rounded-2xl">
+      <h2 class="font-orbitron text-3xl text-green-400">Player 1</h2>
+      <div class="score">Score: {{ p1_score }}</div>
+    </div>
+
+    <!-- Player 2 -->
+    <div class="player-section card flex flex-col justify-center items-center p-8 rounded-2xl">
+      <h2 class="font-orbitron text-3xl text-sky-400">Player 2</h2>
+      <div class="score">Score: {{ p2_score }}</div>
+    </div>
+  </main>
+
+  <script>
+    let timeLeft = 30;
+    const timerElement = document.getElementById("timer");
+
+    const countdown = setInterval(() => {
+      timeLeft--;
+      timerElement.textContent = timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        window.location.reload();
+      }
+    }, 1000);
+  </script>
+
+</body>
+
+</html>

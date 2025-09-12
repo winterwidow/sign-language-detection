@@ -1,0 +1,306 @@
+:root {
+    --primary-glow: #4ade80;
+    /* Green */
+    --secondary-glow: #31c3cd;
+    /* Cyan */
+    --dark-bg: #0d1117;
+    --card-bg: rgba(22, 27, 34, 0.7);
+    /* Darker, slightly transparent */
+    --border-color: rgba(68, 76, 88, 0.7);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--dark-bg);
+    color: #e2e8f0;
+    /* Lighter text for contrast */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+/* Subtle background pattern (digital grid) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Glitch Effect for Title */
+.glitch-text {
+    position: relative;
+    animation: text-glow 1.5s infinite alternate;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--primary-glow);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-1 2s infinite alternate-reverse;
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--secondary-glow);
+    clip: rect(85px, 450px, 100px, 0);
+    animation: glitch-anim-2 3s infinite alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip: rect(38px, 9999px, 10px, 0);
+        transform: skew(-0.5deg);
+    }
+    15% {
+        clip: rect(15px, 9999px, 80px, 0);
+        transform: skew(0.5deg);
+    }
+    30% {
+        clip: rect(60px, 9999px, 20px, 0);
+        transform: skew(-1deg);
+    }
+    45% {
+        clip: rect(10px, 9999px, 70px, 0);
+        transform: skew(0.5deg);
+    }
+    60% {
+        clip: rect(80px, 9999px, 30px, 0);
+        transform: skew(-0.5deg);
+    }
+    75% {
+        clip: rect(25px, 9999px, 90px, 0);
+        transform: skew(1deg);
+    }
+    100% {
+        clip: rect(50px, 9999px, 10px, 0);
+        transform: skew(-0.5deg);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip: rect(25px, 9999px, 70px, 0);
+        transform: skew(0.8deg);
+    }
+    20% {
+        clip: rect(90px, 9999px, 15px, 0);
+        transform: skew(-0.8deg);
+    }
+    40% {
+        clip: rect(10px, 9999px, 60px, 0);
+        transform: skew(0.5deg);
+    }
+    60% {
+        clip: rect(75px, 9999px, 25px, 0);
+        transform: skew(-0.5deg);
+    }
+    80% {
+        clip: rect(30px, 9999px, 85px, 0);
+        transform: skew(1deg);
+    }
+    100% {
+        clip: rect(55px, 9999px, 10px, 0);
+        transform: skew(-0.8deg);
+    }
+}
+
+@keyframes text-glow {
+    0% {
+        text-shadow: 0 0 5px var(--primary-glow), 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow), 0 0 30px var(--primary-glow);
+    }
+    50% {
+        text-shadow: 0 0 8px var(--primary-glow), 0 0 15px var(--primary-glow), 0 0 30px var(--primary-glow), 0 0 40px var(--primary-glow);
+    }
+    100% {
+        text-shadow: 0 0 5px var(--primary-glow), 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow), 0 0 30px var(--primary-glow);
+    }
+}
+
+/* Nav and Button Glow */
+.nav-link-glow:hover {
+    color: white;
+    text-shadow: 0 0 5px var(--primary-glow), 0 0 15px var(--primary-glow);
+}
+
+.glow-button {
+    box-shadow: 0 0 8px var(--primary-glow), 0 0 20px var(--primary-glow);
+    transition: all 0.4s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+.glow-button::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow), var(--primary-glow));
+    background-size: 400%;
+    border-radius: 9999px;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+.glow-button:hover::before {
+    opacity: 1;
+    animation: glowing 8s linear infinite;
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* Card styles */
+.card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+    border-color: var(--primary-glow);
+    box-shadow: 0 0 15px var(--primary-glow);
+    transform: translateY(-5px);
+}
+
+/* Additional styles for the game page */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 100px;
+}
+
+.video-feeds {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.video-box {
+    position: relative;
+    width: 480px;
+    height: 360px;
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 10px var(--primary-glow);
+    overflow: hidden;
+}
+
+.video-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    /* Mirror the webcam feed */
+}
+
+.player-label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: rgba(13, 17, 23, 0.7);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    font-size: 1.125rem;
+}
+
+.timer-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    color: var(--secondary-glow);
+    text-shadow: 0 0 10px var(--secondary-glow), 0 0 20px var(--secondary-glow);
+    margin-top: 2rem;
+}
+
+.word-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 6rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px var(--primary-glow);
+    margin-bottom: 2rem;
+    animation: text-flicker 2s infinite alternate;
+}
+
+@keyframes text-flicker {
+    0%, 19.9% {
+        opacity: 1;
+        text-shadow: 0 0 5px white, 0 0 10px white, 0 0 20px var(--primary-glow);
+    }
+    20%, 20.9% {
+        opacity: 0.8;
+        text-shadow: 0 0 3px white, 0 0 8px white, 0 0 15px var(--primary-glow);
+    }
+    21%, 23.9% {
+        opacity: 1;
+    }
+    24%, 24.9% {
+        opacity: 0.8;
+        text-shadow: none;
+    }
+    25%, 26.9% {
+        opacity: 1;
+    }
+    27%, 29.9% {
+        opacity: 0.5;
+        text-shadow: none;
+    }
+    30%, 35% {
+        opacity: 1;
+    }
+    35.1%, 36% {
+        opacity: 0;
+    }
+    36.1%, 38% {
+        opacity: 1;
+    }
+    38.1%, 40% {
+        opacity: 0;
+    }
+    40.1%, 100% {
+        opacity: 1;
+    }
+}
