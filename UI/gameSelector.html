@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestureFlow - Mission Select</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Additional styles for the carousel */
+        .carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+            width: 100%;
+            height: 550px;
+            /* Give the container a fixed height */
+        }
+
+        .game-card {
+            position: absolute;
+            /* Position cards absolutely within the container */
+            transition: transform 0.6s ease, opacity 0.6s ease, z-index 0.6s ease;
+            flex-shrink: 0;
+            /* Prevent cards from shrinking */
+            z-index: 1;
+        }
+
+        .carousel-nav svg {
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .carousel-nav:hover svg {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header class="fixed top-0 left-0 right-0 z-50 py-4 px-8 bg-[rgba(13,17,23,0.8)] backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="font-orbitron text-2xl font-bold text-sky-400 nav-link-glow">
+                GestureFlow
+            </a>
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="index.html"
+                            class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">HOME</a>
+                    </li>
+                    <li><a href="#"
+                            class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">ABOUT
+                            US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="min-h-screen flex flex-col items-center justify-center p-4 text-center pt-32">
+        <div class="text-center mb-12">
+            <h1 class="font-orbitron text-6xl md:text-7xl font-bold glitch-text" data-text="SELECT MISSION">
+                SELECT MISSION
+            </h1>
+            <p class="text-xl text-sky-300 mt-2">Choose your training simulation.</p>
+        </div>
+
+        <div id="game-carousel" class="relative w-full max-w-7xl flex items-center justify-center">
+            <button id="prev-btn" class="carousel-nav absolute left-0 md:left-10 z-30 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <div class="carousel-container w-full">
+
+                <div class="game-card card w-11/12 md:w-1/2 p-8 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-7xl mb-4">⏱️</div>
+                    <h2 class="font-orbitron text-5xl font-bold mb-4">Time Attack</h2>
+                    <p class="text-gray-300 leading-relaxed mb-8 h-20">Race against the clock. How many signs can you
+                        successfully perform before time runs out?</p>
+                    <a href="timeAttack_game.html"
+                        class="font-orbitron text-xl bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-full glow-button uppercase">Launch
+                        Mission</a>
+                </div>
+
+                <div class="game-card card w-11/12 md:w-1/2 p-8 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-7xl mb-4">🗣️</div>
+                    <h2 class="font-orbitron text-5xl font-bold mb-4">Lexicon</h2>
+                    <p class="text-gray-300 leading-relaxed mb-8 h-20">Translate words and phrases into sign language. A
+                        perfect way to build your vocabulary and precision.</p>
+                    <a href="#"
+                        class="font-orbitron text-xl bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-full glow-button uppercase">Launch
+                        Mission</a>
+                </div>
+
+                <div class="game-card card w-11/12 md:w-1/2 p-8 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-7xl mb-4">🧠</div>
+                    <h2 class="font-orbitron text-5xl font-bold mb-4">Memory Matrix</h2>
+                    <p class="text-gray-300 leading-relaxed mb-8 h-20">Observe a sequence of signs. Can you recreate the
+                        pattern from memory? A true test of focus.</p>
+                    <a href="#"
+                        class="font-orbitron text-xl bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-full glow-button uppercase">Launch
+                        Mission</a>
+                </div>
+
+                <div class="game-card card w-11/12 md:w-1/2 p-8 rounded-xl flex flex-col items-center text-center">
+                    <div class="text-7xl mb-4">⚔️</div>
+                    <h2 class="font-orbitron text-5xl font-bold mb-4">VS Mode</h2>
+                    <p class="text-gray-300 leading-relaxed mb-8 h-20">Challenge an opponent in a head-to-head battle of
+                        speed and accuracy. The fastest signer wins the round.</p>
+                    <a href="#"
+                        class="font-orbitron text-xl bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-10 rounded-full glow-button uppercase">Launch
+                        Mission</a>
+                </div>
+
+            </div>
+
+            <button id="next-btn" class="carousel-nav absolute right-0 md:right-10 z-30 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.game-card');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            let currentIndex = 0;
+            const totalCards = cards.length;
+
+            function updateCarousel() {
+                cards.forEach((card, index) => {
+                    card.classList.remove('is-active'); // This class is for potential extra styling, not used here
+
+                    let transformStyle = '';
+                    let opacity = 0.5;
+                    let zIndex = 1;
+
+                    if (index === currentIndex) {
+                        // Active card
+                        transformStyle = 'translateX(0) translateZ(0) scale(1)';
+                        opacity = 1;
+                        zIndex = 10;
+                    } else if (index === (currentIndex - 1 + totalCards) % totalCards) {
+                        // Previous card
+                        transformStyle = 'translateX(-60%) translateZ(-200px) scale(0.8)';
+                        opacity = 0.5;
+                        zIndex = 5;
+                    } else if (index === (currentIndex + 1) % totalCards) {
+                        // Next card
+                        transformStyle = 'translateX(60%) translateZ(-200px) scale(0.8)';
+                        opacity = 0.5;
+                        zIndex = 5;
+                    } else {
+                        // Hidden cards
+                        transformStyle = 'translateX(0) translateZ(-500px) scale(0.5)';
+                        opacity = 0;
+                        zIndex = 1;
+                    }
+
+                    card.style.transform = transformStyle;
+                    card.style.opacity = opacity;
+                    card.style.zIndex = zIndex;
+                });
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalCards;
+                updateCarousel();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+                updateCarousel();
+            });
+
+            // Set initial state
+            updateCarousel();
+        });
+    </script>
+
+</body>
+
+</html>

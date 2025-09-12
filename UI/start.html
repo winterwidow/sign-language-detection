@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestureFlow - Live Experience</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 py-4 px-8 bg-[rgba(13,17,23,0.8)] backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="font-orbitron text-2xl font-bold text-sky-400 nav-link-glow">GestureFlow</a>
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="index.html" class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">HOME</a></li>
+                    <li><a href="#" class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">ABOUT US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="min-h-screen flex flex-col items-center justify-center p-4 pt-32">
+        <div class="text-center mb-12">
+            <h1 class="font-orbitron text-6xl md:text-7xl font-bold glitch-text" data-text="LIVE RECOGNITION">LIVE RECOGNITION</h1>
+            <p class="text-xl text-sky-300 mt-2">Activate your webcam to begin real-time sign language translation.</p>
+        </div>
+
+        <div class="w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 items-stretch">
+            
+            <div class="w-full md:w-1/2">
+                <h2 class="font-orbitron text-3xl text-sky-400 mb-4 text-left">INPUT STREAM</h2>
+                <div class="relative w-full aspect-video rounded-lg shadow-[0_0_25px_rgba(75,222,128,0.4)] border-2 border-green-400/50 overflow-hidden bg-black">
+                    <video id="webcam-feed" class="w-full h-full object-cover" autoplay playsinline muted></video>
+                    <p id="webcam-placeholder" class="absolute inset-0 flex items-center justify-center text-gray-500 font-orbitron text-2xl">WEBCAM INACTIVE</p>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 flex flex-col">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-orbitron text-3xl text-sky-400 text-left">AI OUTPUT LOG</h2>
+                    
+                    <button id="speak-btn" title="Read Aloud" class="flex items-center gap-x-2 rounded-full py-2 px-4 hover:bg-green-500/20 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                        </svg>
+                        <span class="hidden md:inline font-orbitron text-green-400">Read Aloud</span>
+                    </button>
+                </div>
+                <div id="output-log" class="card w-full flex-grow p-4 rounded-lg border border-gray-700/50 font-mono text-lg text-green-300 overflow-y-auto">
+                    <p class="text-gray-500">> [Awaiting Signal...]</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12">
+            <button id="activate-btn" class="font-orbitron text-2xl bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-12 rounded-full glow-button inline-block uppercase">
+                Activate Webcam
+            </button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const activateBtn = document.getElementById('activate-btn');
+            const webcamFeed = document.getElementById('webcam-feed');
+            const webcamPlaceholder = document.getElementById('webcam-placeholder');
+            
+            // This variable will hold the stream and track the webcam's state
+            let stream = null;
+
+            activateBtn.addEventListener('click', async () => {
+                // If the stream is active, deactivate it
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                    webcamFeed.srcObject = null;
+                    stream = null;
+                    webcamPlaceholder.style.display = 'flex';
+                    activateBtn.textContent = 'Activate Webcam';
+                    console.log("Webcam deactivated.");
+                    return; // End the function here
+                }
+
+                // If the stream is not active, activate it
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    try {
+                        const newStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                        stream = newStream; // Store the stream
+                        
+                        webcamPlaceholder.style.display = 'none';
+                        webcamFeed.srcObject = stream;
+                        
+                        activateBtn.textContent = 'Deactivate Webcam';
+                        console.log("Webcam activated.");
+
+                    } catch (error) {
+                        console.error("Error accessing the webcam: ", error);
+                        webcamPlaceholder.textContent = 'PERMISSION DENIED';
+                    }
+                } else {
+                    console.error("getUserMedia not supported on your browser!");
+                    webcamPlaceholder.textContent = 'WEBCAM NOT SUPPORTED';
+                }
+            });
+
+            // Text-to-speech logic remains the same
+            const speakButton = document.getElementById('speak-btn');
+            const outputLog = document.getElementById('output-log');
+
+            speakButton.addEventListener('click', () => {
+                const textToSpeak = outputLog.innerText;
+                if (textToSpeak && textToSpeak.trim() !== '' && textToSpeak.trim() !== '>[Awaiting Signal...]') {
+                    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                    window.speechSynthesis.speak(utterance);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

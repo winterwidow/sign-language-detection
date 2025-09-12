@@ -5,10 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GestureFlow - Time Attack</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400&display=swap"
+        rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
@@ -24,8 +28,12 @@
             </a>
             <nav>
                 <ul class="flex space-x-8">
-                    <li><a href="index.html" class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">HOME</a></li>
-                    <li><a href="#" class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">ABOUT US</a></li>
+                    <li><a href="index.html"
+                            class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">HOME</a>
+                    </li>
+                    <li><a href="#"
+                            class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">ABOUT
+                            US</a></li>
                 </ul>
             </nav>
         </div>
@@ -47,35 +55,43 @@
 
             <div class="my-8">
                 <p class="text-xl text-sky-300 mb-2">TARGET SIGN</p>
-                <h1 id="prompt-text" class="font-orbitron text-7xl font-black uppercase tracking-wider glitch-text" data-text="READY?">
+                <h1 id="prompt-text" class="font-orbitron text-7xl font-black uppercase tracking-wider glitch-text"
+                    data-text="READY?">
                     READY?
                 </h1>
             </div>
 
-            <div class="relative w-full max-w-2xl mx-auto aspect-video rounded-lg shadow-[0_0_25px_rgba(75,222,128,0.4)] border-2 border-green-400/50 overflow-hidden">
+            <div
+                class="relative w-full max-w-2xl mx-auto aspect-video rounded-lg shadow-[0_0_25px_rgba(75,222,128,0.4)] border-2 border-green-400/50 overflow-hidden">
                 <video id="webcam-feed" class="w-full h-full object-cover" autoplay playsinline muted></video>
-                
-                <div id="prediction-overlay" class="absolute bottom-0 left-0 right-0 p-4 bg-black/50 backdrop-blur-sm text-center">
+
+                <div id="prediction-overlay"
+                    class="absolute bottom-0 left-0 right-0 p-4 bg-black/50 backdrop-blur-sm text-center">
                     <p class="font-orbitron text-lg">
-                        NEURAL LINK: <span id="prediction-output" class="font-bold text-2xl text-green-400 uppercase">...</span>
+                        NEURAL LINK: <span id="prediction-output"
+                            class="font-bold text-2xl text-green-400 uppercase">...</span>
                     </p>
                 </div>
             </div>
 
             <div class="mt-8">
-                <button id="start-game-btn" class="font-orbitron text-2xl bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-12 rounded-full glow-button inline-block uppercase">
+                <button id="start-game-btn"
+                    class="font-orbitron text-2xl bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-12 rounded-full glow-button inline-block uppercase">
                     Start Game
                 </button>
             </div>
-            
+
         </section>
 
-        <div id="game-over-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden">
+        <div id="game-over-modal"
+            class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 hidden">
             <div class="card p-12 rounded-xl text-center border-2 border-green-400">
-                <h2 class="font-orbitron text-6xl font-bold text-red-400 glitch-text" data-text="TIME'S UP!">TIME'S UP!</h2>
+                <h2 class="font-orbitron text-6xl font-bold text-red-400 glitch-text" data-text="TIME'S UP!">TIME'S UP!
+                </h2>
                 <p class="text-2xl mt-4">Your Final Score:</p>
                 <p id="final-score" class="font-orbitron text-8xl font-black text-green-400 my-4">120</p>
-                <button id="play-again-btn" class="font-orbitron text-2xl bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-10 rounded-full glow-button inline-block uppercase">
+                <button id="play-again-btn"
+                    class="font-orbitron text-2xl bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-10 rounded-full glow-button inline-block uppercase">
                     Play Again
                 </button>
             </div>
@@ -84,4 +100,5 @@
     </div>
 
 </body>
+
 </html>
