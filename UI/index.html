@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestureFlow</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body class="text-white">
+
+    <header class="fixed top-0 left-0 right-0 z-50 py-4 px-8 bg-[rgba(13,17,23,0.8)] backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="font-orbitron text-2xl font-bold text-sky-400 nav-link-glow">
+                GestureFlow
+            </a>
+            <nav>
+                <ul class="flex space-x-8">
+                    <li><a href="#" class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">HOME</a></li>
+                    <li><a href="#" class="font-orbitron text-lg text-gray-300 hover:text-white nav-link-glow transition-colors duration-300">ABOUT US</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 text-center pt-24">
+        <section class="mb-16 md:mb-24 max-w-5xl mx-auto">
+            <h1 class="font-orbitron text-7xl md:text-9xl font-bold text-white mb-6 glitch-text" data-text="GestureFlow">
+                GestureFlow
+            </h1>
+            <p class="text-xl md:text-3xl text-sky-300 tracking-wide mb-10">
+                Speak Without Words, AI Sign Language Recognition in Action.
+            </p>
+          <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+    <a href="start.html" class="font-orbitron text-xl md:text-2xl bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-12 rounded-full glow-button inline-block uppercase">
+        Start the Experience
+    </a>
+    <a href="gameSelector.html" class="font-orbitron text-xl md:text-2xl bg-green-500 hover:bg-green-600 text-white font-bold py-5 px-12 rounded-full glow-button inline-block uppercase">
+        View Games
+    </a>
+</div>
+        </section>
+
+        <section class="max-w-6xl mx-auto py-16">
+            <h2 class="font-orbitron text-4xl font-semibold mb-12 border-b-2 border-sky-500/50 pb-4 tracking-wider">How It Works</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="card p-8 rounded-xl flex flex-col items-center">
+                    <div class="text-6xl mb-6 text-sky-400">🖥️</div>
+                    <h3 class="font-orbitron text-2xl font-bold mb-3 text-white">Enable Webcam</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Grant access to your camera. Our advanced AI processes your gestures in real-time, right in your browser.
+                    </p>
+                </div>
+                <div class="card p-8 rounded-xl flex flex-col items-center">
+                    <div class="text-6xl mb-6 text-green-400">✋</div>
+                    <h3 class="font-orbitron text-2xl font-bold mb-3 text-white">Perform Gestures</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Interact effortlessly with simple hand signs: 'fist' for attack, 'open palm' for shield, 'thumbs up' for power-ups.
+                    </p>
+                </div>
+                <div class="card p-8 rounded-xl flex flex-col items-center">
+                    <div class="text-6xl mb-6 text-red-400">🏆</div>
+                    <h3 class="font-orbitron text-2xl font-bold mb-3 text-white">Conquer the Game</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Become the master of your destiny. Control, fight, and win using the most intuitive controller ever – your own hands.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-20 py-8 text-gray-500 w-full border-t border-gray-700/50">
+            <p class="text-lg">Powered by a cutting-edge Keras/TensorFlow Model & Flask.</p>
+            <p class="text-sm mt-2">&copy; 2023 GestureFlow. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
